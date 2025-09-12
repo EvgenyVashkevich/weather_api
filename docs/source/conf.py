@@ -12,6 +12,7 @@
 #
 import sys
 from pathlib import Path
+from  typing import Any
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
@@ -50,7 +51,7 @@ source_suffix = ['.rst', '.md']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns: list[Any] = []
 
 
 # -- Options for HTML output -------------------------------------------------

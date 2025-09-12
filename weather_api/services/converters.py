@@ -45,7 +45,7 @@ def wind2beaufort(speed: float) -> str:
     return beaufort
 
 
-def clouds2condition(clouds: int) -> str:
+def clouds2condition(clouds: float) -> str:
     """ Convert clouds percentage to condition """
 
     clouds /= 100

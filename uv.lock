@@ -1470,6 +1470,33 @@ wheels = [
 ]
 
 [[package]]
+name = "types-aiofiles"
+version = "24.1.0.20250822"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/19/48/c64471adac9206cc844afb33ed311ac5a65d2f59df3d861e0f2d0cad7414/types_aiofiles-24.1.0.20250822.tar.gz", hash = "sha256:9ab90d8e0c307fe97a7cf09338301e3f01a163e39f3b529ace82466355c84a7b", size = 14484, upload-time = "2025-08-22T03:02:23.039Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bc/8e/5e6d2215e1d8f7c2a94c6e9d0059ae8109ce0f5681956d11bb0a228cef04/types_aiofiles-24.1.0.20250822-py3-none-any.whl", hash = "sha256:0ec8f8909e1a85a5a79aed0573af7901f53120dd2a29771dd0b3ef48e12328b0", size = 14322, upload-time = "2025-08-22T03:02:21.918Z" },
+]
+
+[[package]]
+name = "types-jmespath"
+version = "1.0.2.20250809"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d5/ff/6848b1603ca47fff317b44dfff78cc1fb0828262f840b3ab951b619d5a22/types_jmespath-1.0.2.20250809.tar.gz", hash = "sha256:e194efec21c0aeae789f701ae25f17c57c25908e789b1123a5c6f8d915b4adff", size = 10248, upload-time = "2025-08-09T03:14:57.996Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0e/6a/65c8be6b6555beaf1a654ae1c2308c2e19a610c0b318a9730e691b79ac79/types_jmespath-1.0.2.20250809-py3-none-any.whl", hash = "sha256:4147d17cc33454f0dac7e78b4e18e532a1330c518d85f7f6d19e5818ab83da21", size = 11494, upload-time = "2025-08-09T03:14:57.292Z" },
+]
+
+[[package]]
+name = "types-setuptools"
+version = "80.9.0.20250822"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/19/bd/1e5f949b7cb740c9f0feaac430e301b8f1c5f11a81e26324299ea671a237/types_setuptools-80.9.0.20250822.tar.gz", hash = "sha256:070ea7716968ec67a84c7f7768d9952ff24d28b65b6594797a464f1b3066f965", size = 41296, upload-time = "2025-08-22T03:02:08.771Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b6/2d/475bf15c1cdc172e7a0d665b6e373ebfb1e9bf734d3f2f543d668b07a142/types_setuptools-80.9.0.20250822-py3-none-any.whl", hash = "sha256:53bf881cb9d7e46ed12c76ef76c0aaf28cfe6211d3fab12e0b83620b1a8642c3", size = 63179, upload-time = "2025-08-22T03:02:07.643Z" },
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.15.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1551,6 +1578,10 @@ dev = [
     { name = "mypy" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "setuptools" },
+    { name = "types-aiofiles" },
+    { name = "types-jmespath" },
+    { name = "types-setuptools" },
 ]
 
 [package.metadata]
@@ -1580,6 +1611,10 @@ dev = [
     { name = "mypy", specifier = ">=1.18.1" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "ruff", specifier = ">=0.13.0" },
+    { name = "setuptools", specifier = ">=80.9.0" },
+    { name = "types-aiofiles", specifier = ">=24.1.0.20250822" },
+    { name = "types-jmespath", specifier = ">=1.0.2.20250809" },
+    { name = "types-setuptools", specifier = ">=80.9.0.20250822" },
 ]
 
 [[package]]

@@ -18,7 +18,7 @@ class LocalEventLog:
     def __init__(self):
         self.db_path = Path(__file__).parent.parent.parent / "Event_log"
         self.db_path.mkdir(parents=True, exist_ok=True)
-        self._conn: aiosqlite.Connection | None = None
+        self._conn: aiosqlite.Connection | None
         self._ready = False
 
 

@@ -1,3 +1,5 @@
+from typing import Any
+
 import uvicorn
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -53,25 +55,32 @@ class App:
             forwarded_allow_ips='*'
         )
 
-    def url_for(self, endpoint: str, path_params: dict = None, query_params: dict = None) -> str:
+    def url_for(
+        self,
+        endpoint: str,
+        path_params: dict[str, Any] | None = None,
+        query_params: dict[str, Any] | None = None
+    ) -> str:
         """ Generate relative URL for `endpoint` """
 
         endpoint_parts = endpoint.split('.')
         endpoint_tags = endpoint_parts[:-1]
         endpoint_name = endpoint_parts[-1]
         if not endpoint_tags or not endpoint_name:
+            assert path_params is not None
             raise NoMatchFound(endpoint, path_params)
         for route in self.server.routes:
-            if endpoint_name != route.name or any(tag not in getattr(route, 'tags', []) for tag in endpoint_tags):
+            if endpoint_name != route.name or any(tag not in getattr(route, 'tags', []) for tag in endpoint_tags):  # type: ignore[attr-defined]
                 continue
             try:
                 url = route.url_path_for(endpoint_name, **(path_params or {}))
                 if query_params:
                     query = '&'.join(f'{k}={v}' for k, v in query_params.items())
-                    url = f'{url}?{query}'
+                    url = f'{url}?{query}'  # type: ignore[assignment]
                 return url
             except NoMatchFound:
                 pass
+        assert path_params is not None
         raise NoMatchFound(endpoint, path_params)
 
     def render_template(self, template: str, request: Request, status_code: int = status.HTTP_200_OK, **kwargs):

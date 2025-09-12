@@ -22,8 +22,8 @@ class Context(BaseModel):
     def load(
         cls,
         package_dir: Union[str, Path],
-        yml_path: Union[str, Path] = None,
-        env_path: Union[str, Path] = None
+        yml_path: Union[str, Path] | None = None,
+        env_path: Union[str, Path] | None = None
     ) -> 'Context':
         """ Load configs from environment and YAML file """
 

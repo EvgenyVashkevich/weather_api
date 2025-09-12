@@ -29,7 +29,7 @@ def handle_exception(status_code: int, message: str) -> JSONResponse:
 def validation(_: Request, exc: Exceptions):
     return handle_exception(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        message=exc.detail
+        message=exc.detail  # type: ignore[union-attr]
     )
 
 
@@ -45,4 +45,4 @@ def system(_: Request, exc: Exceptions):
 @app.server.exception_handler(HTTPException)
 def http(_: Request, exc: Exceptions):
     _logger.debug(exc)
-    return handle_exception(status_code=exc.status_code, message=exc.detail)
+    return handle_exception(status_code=exc.status_code, message=exc.detail)  # type: ignore[union-attr]
