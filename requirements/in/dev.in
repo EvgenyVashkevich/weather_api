@@ -1,0 +1,16 @@
+# linting
+flake8
+pylint
+
+# debug
+ipython
+
+# deploy
+pydeployhelp
+
+# documentation
+sphinx
+sphinx_rtd_theme
+
+# requirements
+pip-tools

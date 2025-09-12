@@ -1,0 +1,52 @@
+# set environment variables
+{% set PROJECT_USER = 'admin' %}
+{% set PROJECT_ROOT = '/home/' ~ PROJECT_USER ~ '/' ~ PROJECT_SLUG %}
+{% set VIRTUAL_ENV = PROJECT_ROOT ~ '/venv' %}
+{% set REPLICAS_NUM = REPLICAS_NUM | default(1) %}
+{% set BACKEND_SERVICE_NAME = PROJECT_SLUG ~ '-backend-' ~ ENV %}
+
+version: "3"
+services:
+
+  # backend
+  {{ BACKEND_SERVICE_NAME }}:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      args:
+        PROJECT_SLUG: {{ PROJECT_SLUG }}
+        PROJECT_USER: {{ PROJECT_USER }}
+        VIRTUAL_ENV: {{ VIRTUAL_ENV }}
+    image: {{ PROJECT_SLUG }}-backend:{{ ENV }}
+    container_name: {{ BACKEND_SERVICE_NAME }}
+    restart: always
+    expose:
+      - "{{ PORT }}"
+    networks:
+      - {{ PROJECT_SLUG }}-{{ ENV }}
+    ports:
+      - {{ PORT }}:{{ PORT }}
+    command: gunicorn run:server --workers {{ REPLICAS_NUM }} --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:{{ PORT }}
+    environment:
+      HOST: {{ HOST }}
+      PORT: {{ PORT }}
+      ENABLE_CORS: "{{ ENABLE_CORS }}"
+      REDIS_HOST: {{ REDIS_HOST }}
+      API_KEY: {{ API_KEY }}
+    volumes:
+      - {{ VOLUMES_ROOT }}/logs:{{ PROJECT_ROOT }}/logs
+
+  # cache
+  {{ PROJECT_SLUG }}-cache-{{ ENV }}:
+    image: redis
+    container_name: {{ PROJECT_SLUG }}-cache-{{ ENV }}
+    restart: always
+    ports:
+      - {{ REDIS_PORT }}:6379
+    networks:
+      - {{ PROJECT_SLUG }}-{{ ENV }}
+
+networks:
+  {{ PROJECT_SLUG }}-{{ ENV }}:
+    name: {{ PROJECT_SLUG }}-{{ ENV }}
+    external: true

@@ -1,0 +1,43 @@
+server:
+  host: localhost
+  port: 8080
+  enable_cors: false
+redis:
+  host: localhost
+  port: 6379
+  db: "0"
+  encoding: utf-8
+  hijack_root_logger: false
+path:
+  logs: logs
+logging:
+  version: 1
+  disable_existing_loggers: false
+  formatters:
+    simple:
+      format: "%(asctime)s - %(name)s:%(lineno)d - [%(levelname)s] - %(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: simple
+    file:
+      class: logging.handlers.TimedRotatingFileHandler
+      when: midnight
+      backupCount: 90
+      level: INFO
+      formatter: simple
+      filename: main.log
+  loggers:
+    uvicorn:
+      level: INFO
+      propagate: yes
+      handlers:
+        - file
+  root:
+    level: INFO
+    handlers:
+      - console
+      - file
+weather:
+  api_url_format: http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}
