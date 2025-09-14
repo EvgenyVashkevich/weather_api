@@ -1,0 +1,52 @@
+name: CI
+
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  lint-type-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            fastapi uvicorn httpx pydantic \
+            pytest pytest-asyncio pytest-cov \
+            ruff mypy pre-commit redis aiosqlite
+
+      - name: Ruff (lint)
+        run: |
+          ruff --version
+          ruff check .
+
+      - name: Mypy (type check)
+        run: |
+          mypy --version
+          mypy .
+
+      - name: Pre-commit (all hooks)
+        run: |
+          pre-commit --version
+          pre-commit run --all-files --show-diff-on-failure
+
+      - name: Pytest (unit tests + coverage)
+        env:
+          OPENWEATHER_API_KEY: dummy
+        run: |
+          pytest -q --cov=main --cov-report=term-missing

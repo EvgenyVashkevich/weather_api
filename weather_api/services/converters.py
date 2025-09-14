@@ -2,61 +2,61 @@ from datetime import datetime
 
 
 def kelvin2celsius(temperature: float) -> str:
-    """ Convert `temperature` from Kelvin to Celsius """
+    """Convert `temperature` from Kelvin to Celsius"""
 
-    return f'{int(temperature - 273.15)} °C'
+    return f"{int(temperature - 273.15)} °C"
 
 
 def kelvin2fahrenheit(temperature: float) -> str:
-    """ Convert `temperature` from Kelvin to Fahrenheit """
+    """Convert `temperature` from Kelvin to Fahrenheit"""
 
-    return f'{int((temperature - 273.15) * 9/5) + 32} °F'
+    return f"{int((temperature - 273.15) * 9 / 5) + 32} °F"
 
 
 def utc2time(utctime: int) -> str:
-    """ Convert UTC timestamp to current time """
+    """Convert UTC timestamp to current time"""
 
-    return datetime.utcfromtimestamp(utctime).strftime('%H:%M')
+    return datetime.utcfromtimestamp(utctime).strftime("%H:%M")
 
 
 def wind2beaufort(speed: float) -> str:
-    """ Convert wind speed to Beaufort scale (see https://en.wikipedia.org/wiki/Beaufort_scale) """
+    """Convert wind speed to Beaufort scale (see https://en.wikipedia.org/wiki/Beaufort_scale)"""
 
     if speed <= 0.5:
-        beaufort = 'Calm'
+        beaufort = "Calm"
     elif speed <= 1.5:
-        beaufort = 'Light air'
+        beaufort = "Light air"
     elif speed <= 3.3:
-        beaufort = 'Light breeze'
+        beaufort = "Light breeze"
     elif speed <= 5.5:
-        beaufort = 'Gentle breeze'
+        beaufort = "Gentle breeze"
     elif speed <= 7.9:
-        beaufort = 'Moderate breeze'
+        beaufort = "Moderate breeze"
     elif speed <= 10.7:
-        beaufort = 'Fresh breeze'
+        beaufort = "Fresh breeze"
     elif speed <= 13.8:
-        beaufort = 'Strong breeze'
+        beaufort = "Strong breeze"
     elif speed <= 17.1:
-        beaufort = 'High wind'
+        beaufort = "High wind"
     elif speed <= 20.7:
-        beaufort = 'Gale'
+        beaufort = "Gale"
     else:
-        beaufort = 'Storm'
+        beaufort = "Storm"
     return beaufort
 
 
 def clouds2condition(clouds: float) -> str:
-    """ Convert clouds percentage to condition """
+    """Convert clouds percentage to condition"""
 
     clouds /= 100
     if clouds <= 1 / 8:
-        condition = 'Sunny'
+        condition = "Sunny"
     elif clouds <= 3 / 8:
-        condition = 'Mostly Sunny'
+        condition = "Mostly Sunny"
     elif clouds <= 5 / 8:
-        condition = 'Partly Sunny'
+        condition = "Partly Sunny"
     elif clouds <= 7 / 8:
-        condition = 'Mostly Cloudy'
+        condition = "Mostly Cloudy"
     else:
-        condition = 'Cloudy'
+        condition = "Cloudy"
     return condition

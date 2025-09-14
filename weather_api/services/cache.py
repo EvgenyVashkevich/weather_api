@@ -22,14 +22,15 @@ class Cache:
                 return None
             data = json.loads(raw)
             return WeatherResponse.model_validate(data)
-        except Exception as e: # pragma: no cover
+        except Exception as e:  # pragma: no cover
             logger.warning("cache get failed: %s", e)
             return None
-
 
     async def set(self, city: str, cache_ttl_seconds: int, payload: WeatherResponse) -> None:
         key = f"{CACHE_PREFIX}:{city}"
         try:
-            await self.cache.setex(key, cache_ttl_seconds, json.dumps(payload.model_dump(), ensure_ascii=False))
+            await self.cache.setex(
+                key, cache_ttl_seconds, json.dumps(payload.model_dump(), ensure_ascii=False)
+            )
         except Exception as e:
             logger.warning("cache set failed: %s", e)

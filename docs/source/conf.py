@@ -12,18 +12,18 @@
 #
 import sys
 from pathlib import Path
-from  typing import Any
+from typing import Any
+
+from weather_api import __version__
 
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(project_root))
 
-from weather_api import __version__
-
 # -- Project information -----------------------------------------------------
 
-project = 'weather_api'
-copyright = '2025, Yauheni Vashkevich'
-author = 'Yauheni Vashkevich'
+project = "weather_api"
+copyright = "2025, Yauheni Vashkevich"
+author = "Yauheni Vashkevich"
 
 # The full version, including alpha/beta/rc tags
 release = __version__
@@ -36,17 +36,17 @@ version = __version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.napoleon',
-    'sphinx.ext.todo',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.githubpages'
+    "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.githubpages",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
-source_suffix = ['.rst', '.md']
+templates_path = ["_templates"]
+source_suffix = [".rst", ".md"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -59,4 +59,4 @@ exclude_patterns: list[Any] = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
