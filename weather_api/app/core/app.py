@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, cast
 
 import uvicorn
 from fastapi import FastAPI, Request, status
@@ -75,7 +75,7 @@ class App:
             assert path_params is not None
             raise NoMatchFound(endpoint, path_params)
         for route in self.server.routes:
-            if endpoint_name != route.name or any(
+            if endpoint_name != cast(StaticFiles, route) or any(
                 tag not in getattr(route, "tags", []) for tag in endpoint_tags
             ):  # type: ignore[attr-defined]
                 continue
